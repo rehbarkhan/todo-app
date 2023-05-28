@@ -14,5 +14,5 @@ docker-compoes up
 ```
 
 ### App Access
-- API is running on http://localhost:8080
+- API is running on http://localhost:8080/swagger/
 - React is running on http://localhost:3000
