@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  backend:
+    container_name: api
+    image: django_api:v1
+    build: .
+    ports:
+      - 8080:8080
+    volumes:
+      - ./app:/app
+    command: sh -c /scripts/dev/start_api.sh
+    networks:
+      - localnet
+  frontend:
+    container_name: ui
+    image: django_api:v1
+    ports:
+      - 3000:3000
+    command: sh -c /scripts/dev/start_ui.sh
+    volumes:
+      - ./app:/app
+    networks:
+      - localnet
+networks:
+  localnet:
