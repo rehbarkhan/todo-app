@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
+import CardData from '../components/CardData';
+import CloseCardData from '../components/CloseCardData';
 const Home = () => {
     const [data,setData] = useState([]);
     const [postData,updatePostData] = useState(true)
@@ -20,7 +22,6 @@ const Home = () => {
     }
     useEffect(()=>{
         fetch_data();
-        console.log("first time")
     },[postData])
 
     function sendData(){
@@ -42,15 +43,20 @@ const Home = () => {
     }
     return (
         <div>
-            <center className='my-5'> 
-                <h1 className='display-4'>Todo List</h1>
+            <center> 
+                <h1 className='display-4 mt-5'>Todo List</h1>
+                <hr style={{width:"600px"}}></hr>
                 {
                     data.length === 0 ?<h1>No data Present</h1>:
                     <div>
                         {data.map((value,k)=>{
-                            return <div key={k}>
-                                {value.id} {value.title} {value.description}
-                            </div>
+                            if(value.status === 'OPEN'){
+                                return <CardData key={k} id={value.id} title={value.title} />
+                            }
+                            else{
+                                return <CloseCardData key={k} id={value.id} title={value.title} />
+                            }
+                            
                         })}
                     </div>
                 }
